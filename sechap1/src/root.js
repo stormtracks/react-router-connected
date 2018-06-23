@@ -1,23 +1,23 @@
 import React, { Component } from "react";
 
-import { applyMiddleware, compose, createStore } from 'redux'
-import { createBrowserHistory } from 'history'
-import { routerMiddleware, connectRouter } from 'connected-react-router'
-import { Provider } from 'react-redux'
-import App from './App'
-import rootReducer from './reducers'
+import { applyMiddleware, compose, createStore } from "redux";
+import { createBrowserHistory } from "history";
+import { routerMiddleware, connectRouter } from "connected-react-router";
+import { Provider } from "react-redux";
 
-const history = createBrowserHistory()
+import { createLogger } from "redux-logger";
 
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+import App from "./App";
+import rootReducer from "./reducers";
+
+const history = createBrowserHistory();
+const loggerMiddleware = createLogger();
+
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   connectRouter(history)(rootReducer),
-  composeEnhancer(
-    applyMiddleware(
-      routerMiddleware(history),
-    ),
-  ),
-)
+  composeEnhancer(applyMiddleware(routerMiddleware(history), loggerMiddleware))
+);
 
 export default class Root extends Component {
   render() {

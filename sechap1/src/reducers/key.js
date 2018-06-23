@@ -1,6 +1,6 @@
 import { SELECT_KEY } from "../actions";
 
-export function selectedKey(state = 'ch1', action) {
+export function selectedKey(state = 'home', action) {
   switch (action.type) {
     case SELECT_KEY:
       return action.key;
@@ -9,7 +9,7 @@ export function selectedKey(state = 'ch1', action) {
   }
 }
 
-export const keys = (state = ['ch1','ch2'], action) => {
+export const keys = (state = ['home','hello','counter'], action) => {
   switch (action.type) {
     default:
       return state;
